@@ -48,6 +48,15 @@ const CalendarGrid = ({ onDateClick, events = {} }) => {
     );
   };
 
+  const today = new Date();
+
+  // Function to check if a day is today
+  const isToday = (day) =>
+    day &&
+    day.getDate() === today.getDate() &&
+    day.getMonth() === today.getMonth() &&
+    day.getFullYear() === today.getFullYear();
+
   return (
     <div className="w-full max-w-4xl bg-white rounded-lg shadow-lg p-4">
       <div className="flex justify-between items-center mb-4">
@@ -78,8 +87,8 @@ const CalendarGrid = ({ onDateClick, events = {} }) => {
           <div
             key={index}
             className={`flex justify-center items-center border p-2 cursor-pointer rounded-lg ${
-              day ? "hover:bg-blue-100" : "bg-gray-100"
-            }`}
+              day ? "hover:bg-blue-100 hover:text-black" : "bg-gray-100"
+            } ${isToday(day) ? "bg-black text-white" : ""}`}
             onClick={day ? () => onDateClick(day) : undefined}
           >
             {day ? (
